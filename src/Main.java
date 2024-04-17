@@ -1,16 +1,23 @@
-
+import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URL;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.File;
 
 public class Main {
+
     public static void main(String[] args) throws IOException {
-File fileName = new File("D:\\dev\\java\\ParsingJson\\uom json response.txt");
-String jsonStringFromFile = new String(Files.readAllBytes(Paths.get(fileName.toString())));
+
+        JSONObject jsonFromURL = new JSONObject(IOUtils.toString(new URL("https://graph.facebook.com/me"), Charset.forName("UTF-8")));
+
+
+        File fileName = new File("D:\\dev\\java\\ParsingJson\\uom json response.txt");
+        String jsonStringFromFile = new String(Files.readAllBytes(Paths.get(fileName.toString())));
         String jsonString = """
                 {
                     "d": {
@@ -47,6 +54,6 @@ String jsonStringFromFile = new String(Files.readAllBytes(Paths.get(fileName.toS
 
         JSONArray jsonObjectUnits = jsonObject.getJSONObject("d").getJSONArray("results");
 
-      jsonObjectUnits.forEach(unit -> System.out.println(unit));
+        jsonObjectUnits.forEach(unit -> System.out.println(unit));
     }
 }
