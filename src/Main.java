@@ -47,6 +47,6 @@ String jsonStringFromFile = new String(Files.readAllBytes(Paths.get(fileName.toS
 
         JSONArray jsonObjectUnits = jsonObject.getJSONObject("d").getJSONArray("results");
 
-        System.out.println(jsonObjectUnits.get(1));
+      jsonObjectUnits.forEach(unit -> System.out.println(unit));
     }
 }
